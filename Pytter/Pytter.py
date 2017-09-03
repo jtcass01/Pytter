@@ -1,7 +1,5 @@
 from API import API
-import sys
-
-twitter = API()
+from Tasks import Tasks
 
 class Pytter(object):
     def __init__(self):
@@ -17,21 +15,18 @@ class Pytter(object):
         response = input("What would you like to do?\t")
         assert int(response) < 4 and int(response) >= 0
         self.perform_task(response)
-        self.display_menu()
 
     def perform_task(self, task):
         switch = {
-            '0': sys.exit,
-            '1': self.store_tweet
+            '0': Tasks.quit,
+            '1': Tasks.store_tweet,
+            '2': Tasks.start_server,
+            '3': Tasks.analyze
             }
 
         function = switch.get(task, "invalid input.")
 
         return function()
-
-    def store_tweet(self):
-        print("Test")
-        pass
 
 def main():
     test_pytter = Pytter()
