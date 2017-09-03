@@ -25,6 +25,9 @@
     <Compile Include="API.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataProcessor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pytter.py" />
     <Compile Include="Tasks.py">
       <SubType>Code</SubType>
@@ -32,6 +35,17 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tweets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tweets\history.csv">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tweets\scheduled.csv">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
