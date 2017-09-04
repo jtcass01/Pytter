@@ -29,6 +29,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pytter.py" />
+    <Compile Include="Scheduler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Server.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tasks.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,13 +43,16 @@
     <InterpreterReference Include="Global|PythonCore|3.6" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="tweets\" />
+    <Folder Include="database\" />
+    <Folder Include="database\" />
+    <Folder Include="database\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tweets\history.csv">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="tweets\scheduled.csv">
+    <Content Include="database\images\rcr-logo-dark.png" />
+    <Content Include="database\images\rcr-logo.png" />
+    <Content Include="database\tweet_history.csv" />
+    <Content Include="database\tweet_schedule.csv" />
+    <Content Include="database\user.csv">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>

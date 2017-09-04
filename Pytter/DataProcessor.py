@@ -36,11 +36,18 @@ class DataProcessor(object):
         self.file_path = file_path
         self.update_data()
 
+    def store(self, file_path):
+        self.pddata.to_csv(path=file_path, header=True)
+
     def get_parameter_list(self):
         return self.parameter_list
 
     def add_column(self, data, label=None):
         self.pddata = pd.concat([self.pddata, pd.Series(data, name=label)], axis=1)
+        self.update_data()
+
+    def add_row(self, new_row_array):
+        self.pddata.append(pd.DataFrame([new_row_array]))
         self.update_data()
 
     def get_column_np(self, header=None, index=None):

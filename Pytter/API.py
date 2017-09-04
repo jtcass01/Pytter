@@ -1,16 +1,41 @@
 import twitter
+from DataProcessor import DataProcessor
+
+USERPATH = "C:/Users/JakeT/OneDrive/Documents/Visual Studio 2017/Projects/Pytter/Pytter/database/user.csv"
 
 class API(object):
-    """description of class -- UPDATE"""
-    def __init__(self, TOKEN = "417857575-fRZFQbM6N2z7Hd6vYn8EAOfufsDoA1JPBebFKUBI", TOKEN_KEY = "oCRnAlteVwKfxUBIkfvKCueUTJTW6EL68lgcMeBPVDrFf", CON_SEC_KEY = "bpnYcmfXsoGVka9KIp1mooNFyMkesM2wJsBLEFLzwvD8DM7DDa", CON_SEC = "z8KJ9B0zX8EuHINoJuYtd8E6B"):
-        self.consumer_key = CON_SEC
-        self.consumer_secret = CON_SEC_KEY
-        self.access_token = TOKEN
-        self.access_token_secret = TOKEN_KEY        
-        self.o_auth = twitter.OAuth(TOKEN, TOKEN_KEY, CON_SEC, CON_SEC_KEY)
-        self.api = twitter.Twitter(auth = self.o_auth)
+    """Description:  Object used for tweeting and accessing information from twitter.
+       TODO: tweet() function needs to be updated to work with images.
+    """
 
-    def tweet(self, status):
-        assert type(status) == type(""), "Status update must be a string."
+    def __init__(self):
+        self.profile = Profile()
+        self.api = twitter.Twitter(auth = self.profile.authenticate())
 
-        self.api.statuses.update(status=status)
+    def tweet(self, status=None, image=None):
+        if status != None and image == None:
+            assert type(status) == type(""), "Status update must be a string."
+            self.api.statuses.update(status=status)
+        if image != None:
+            assert type(status) == type("") or status == None, "Status update must be a string."
+            
+            with open(image, "rb") as image_file:
+                image_data = image_file.read()
+                t_up = twitter.Twitter(domain='upload.twitter.com', auth = self.profile.authenticate())
+                id_img1 = t_up.media.upload(media=image_data)
+                id_img2 = t_up.media.upload(media=image_data)
+
+                self.api.statuses.update(status=status, media_ids=",".join([id_img1, id_img2]))
+
+class Profile(object):
+    """TODO: ADD CLASS DESCRIPTION"""
+    def __init__(self):
+        self.processor = DataProcessor(file_path=USERPATH)
+
+    def authenticate(self):
+        consumer_key = list(self.processor.get_column_np("consumer_key"))[0]
+        consumer_secret = list(self.processor.get_column_np("consumer_secret"))[0]
+        access_token = list(self.processor.get_column_np("access_token"))[0]
+        access_token_secret = list(self.processor.get_column_np("access_token_secret"))[0]
+
+        return twitter.OAuth(access_token, access_token_secret, consumer_key, consumer_secret)

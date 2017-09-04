@@ -4,6 +4,7 @@ from Tasks import Tasks
 class Pytter(object):
     def __init__(self):
         self.twitter = API()
+        self.tasks = Tasks()
 
     def display_menu(self):
         print("===== Pytter Menu =====")
@@ -18,10 +19,10 @@ class Pytter(object):
 
     def perform_task(self, task):
         switch = {
-            '0': Tasks.quit,
-            '1': Tasks.store_tweet,
-            '2': Tasks.start_server,
-            '3': Tasks.analyze
+            '0': self.tasks.quit,
+            '1': self.tasks.store_tweet,
+            '2': self.tasks.start_server,
+            '3': self.tasks.analyze
             }
 
         function = switch.get(task, "invalid input.")
