@@ -1,14 +1,17 @@
 import sched, time
 from datetime import datetime
 from DataProcessor import DataProcessor
+import datetime
 
 class Scheduler(object):
     """description of class"""
     def __init__(self):
         self.schedule = DataProcessor("C:/Users/JakeT/OneDrive/documents/visual studio 2017/Projects/Pytter/Pytter/database/tweet_schedule.csv")
 
-    def schedule_tweet(self, tweet, time):
-        self.schedule.add_row([tweet.to_list()])
+    def schedule_tweet(self, tweet):
+#        print(self.schedule, "schedule before")
+        self.schedule.add_row(tweet.to_list())
+#        print(self.schedule, "schedule after")
         pass
 
 """IMPORTANT!!! Must use datetime.datetime since time does not hold day and year values!!!"""
@@ -18,8 +21,7 @@ class Tweet(object):
         self.status = status
         self.media = media
         if tweet_time == None:
-            tweet_time = datetime.datetime.now().time()
-            self.tweet_time = datetime.time(tweet_time.hour, tweet_time.minute, tweet_time.second+15)
+            self.tweet_time = datetime.datetime.now() + datetime.timedelta(seconds=15)
         else:
             self.tweet_time = tweet_time
 

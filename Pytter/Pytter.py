@@ -20,7 +20,7 @@ class Pytter(object):
     def perform_task(self, task):
         switch = {
             '0': self.tasks.quit,
-            '1': self.tasks.store_tweet,
+            '1': self.tasks.store_tweet_temp,
             '2': self.tasks.start_server,
             '3': self.tasks.analyze
             }

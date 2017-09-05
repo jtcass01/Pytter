@@ -47,7 +47,10 @@ class DataProcessor(object):
         self.update_data()
 
     def add_row(self, new_row_array):
+        print(new_row_array, "new_row_array")
+        print(self.pddata, "data before")
         self.pddata.append(pd.DataFrame([new_row_array]))
+        print(self.pddata, "data after")
         self.update_data()
 
     def get_column_np(self, header=None, index=None):

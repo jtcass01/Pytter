@@ -1,5 +1,7 @@
 #from API import API
 from Scheduler import Scheduler, Tweet
+from datetime import datetime, timedelta
+import datetime
 import sys
 
 class Tasks(object):
@@ -24,7 +26,14 @@ class Tasks(object):
         hour = input("hour: ")
 
         self.scheduler.schedule_tweet(tweet)
-        pass
+    
+    def store_tweet_temp(self):
+        test_tweet0 = Tweet(status="test",media="database/images/rcr-logo.png",tweet_time=datetime.datetime.now() + datetime.timedelta(days=1))
+        test_tweet1 = Tweet(status="test")
+
+        self.scheduler.schedule_tweet(test_tweet0)
+        self.scheduler.schedule_tweet(test_tweet1)
+
 
     def start_server(self):
 #        self.twitter_api.tweet(status="test")
